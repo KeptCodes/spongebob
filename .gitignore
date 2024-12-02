@@ -4,10 +4,13 @@ obj/
 
 # Ignore configuration files that might contain sensitive information
 config.json
+_config/
+__pycache__/
 # User-specific files for IDEs
 .vscode/
 .idea/
 test.png
+.venv/
 
 # User-specific files for Visual Studio
 .vs/

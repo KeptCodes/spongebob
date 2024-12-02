@@ -1,0 +1,5 @@
+customtkinter
+websockets
+pyautogui
+pystray
+pillow
