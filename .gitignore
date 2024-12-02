@@ -1,0 +1,50 @@
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore configuration files that might contain sensitive information
+config.json
+# User-specific files for IDEs
+.vscode/
+.idea/
+test.png
+
+# User-specific files for Visual Studio
+.vs/
+.vs2019/
+.vs2017/
+.vscode/
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Ignore dependency directories
+node_modules/
+
+# Ignore temporary files
+*.tmp
+*.bak
+*.swp
+
+# Ignore local user settings and environment files
+.env
+
+# Ignore log files
+*.log
+
+# Ignore user-specific .user files for Visual Studio
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Ignore compiled DLLs if any
+*.dll
+
+# Ignore published files (for self-contained or framework-dependent applications)
+publish/
+
+# Ignore Mac-specific files
+.DS_Store
