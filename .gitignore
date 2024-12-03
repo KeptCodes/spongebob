@@ -11,7 +11,9 @@ __pycache__/
 .idea/
 test.png
 .venv/
-
+build/
+dist/
+app.spec
 # User-specific files for Visual Studio
 .vs/
 .vs2019/

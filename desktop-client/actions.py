@@ -5,6 +5,7 @@ import random
 import string
 from datetime import datetime
 import socket
+import subprocess
 
 
 def get_local_ip() -> str:
@@ -56,10 +57,20 @@ def take_screenshot() -> Dict[str, str]:
 def shutdown_pc() -> dict:
     """Shutdown the PC."""
     try:
-        # os.system("shutdown /s /f /t 0")  # Windows command for shutdown
-        return {"status": "success", "message": "PC shutdown command executed"}
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
+        # Attempt a safe shutdown
+        subprocess.run(["shutdown", "/s", "/t", "0"], check=True)
+        return {"status": "success", "message": "PC is shutting down safely."}
+    except subprocess.CalledProcessError as _:
+        print("Safe shutdown failed, attempting forced shutdown.")
+        try:
+            # Fall back to forced shutdown
+            subprocess.run(["shutdown", "/s", "/f", "/t", "0"], check=True)
+            return {"status": "success", "message": "PC is shutting down forcibly."}
+        except subprocess.CalledProcessError as force_error:
+            return {
+                "status": "error",
+                "message": f"Forced shutdown also failed: {force_error}",
+            }
 
 
 def execute_mouse_macro() -> dict:
@@ -72,6 +83,17 @@ def execute_mouse_macro() -> dict:
         return {"status": "error", "message": str(e)}
 
 
+def shift_n() -> dict:
+    """Simulate pressing Shift + N."""
+    try:
+        pyautogui.keyDown("shift")
+        pyautogui.press("n")
+        pyautogui.keyUp("shift")
+        return {"status": "success", "message": "Executed Shift + N"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
 def handle_action(action: str) -> dict:
     """Handle the action based on the requested action string."""
     if action == "shutdown":
@@ -80,5 +102,7 @@ def handle_action(action: str) -> dict:
         return take_screenshot()
     elif action == "mouse_macro":
         return execute_mouse_macro()
+    elif action == "skip_yt":
+        return shift_n()
     else:
         return {"status": "error", "message": "Unknown action"}
